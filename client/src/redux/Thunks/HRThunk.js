@@ -36,6 +36,17 @@ export const HandlePostHumanResources = createAsyncThunk("HandlePostHumanResourc
     }
 })
 
+export const HandleHRLogout = createAsyncThunk("HandleHRLogout", async (_, { rejectWithValue }) => {
+    try {
+        const response = await apiService.post(`${HREndPoints.LOGOUT}`, {}, {
+            withCredentials: true
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const HandlePutHumanResources = createAsyncThunk("HandlePutHumanResources", async (HRData, { rejectWithValue }) => { })
 
 export const HandlePatchHumanResources = createAsyncThunk("HandlePutHumanResources", async (HRData, { rejectWithValue }) => { })

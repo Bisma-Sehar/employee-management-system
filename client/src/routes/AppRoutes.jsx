@@ -1,10 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import { EmployeeRoutes } from "./employeeroutes.jsx"
 import { HRRoutes } from "./HRroutes.jsx";
+import { NotFound } from "../pages/common/NotFound.jsx";
 
 export const router = createBrowserRouter([
     ...EmployeeRoutes,
-    ...HRRoutes 
+    ...HRRoutes,
+    // Catch-all route for 404 pages - must be last
+    {
+        path: "*",
+        element: <NotFound />
+    }
 ],
     {
         future: {

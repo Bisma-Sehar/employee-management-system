@@ -35,6 +35,17 @@ export const HandlePostEmployees = createAsyncThunk("HandlePostEmployees", async
     }
 })
 
+export const HandleEmployeeLogout = createAsyncThunk("HandleEmployeeLogout", async (_, { rejectWithValue }) => {
+    try {
+        const response = await apiService.post(`${APIsEndPoints.LOGOUT}`, {}, {
+            withCredentials: true
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const HandlePutEmployees = createAsyncThunk()
 
 export const HandlePatchEmployees = createAsyncThunk()

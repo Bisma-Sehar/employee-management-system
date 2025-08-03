@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/sidebar"
 
 import { NavLink, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { HandleHRLogout } from "@/redux/Thunks/HRThunk"
 
 
 
@@ -18,12 +20,19 @@ import { NavLink, useNavigate } from "react-router-dom"
 
 export function HRdashboardSidebar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-
-
-  const handleLogout = () => {
-    localStorage.removeItem("token"); 
-    navigate("/auth/HR/login");       
+  const handleLogout = async () => {
+    try {
+      await dispatch(HandleHRLogout()).unwrap();
+      localStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // Still clear localStorage and navigate even if API call fails
+      localStorage.clear();
+      navigate("/");
+    }
   };
 
 
@@ -123,7 +132,7 @@ export function HRdashboardSidebar() {
             alt="Logout"
             className="w-6"
           />
-          <span className="text-[16px] font-medium"></span>
+          <span className="text-[16px] font-medium">Logout</span>
         </button>
       </SidebarFooter>
     </Sidebar>

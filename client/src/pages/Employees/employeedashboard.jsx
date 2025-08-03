@@ -1,17 +1,30 @@
 
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { HandleEmployeeLogout } from "@/redux/Thunks/EmployeeThunk";
 
 export const EmployeeDashboard = () =>{
-//     return(
-//         <div className="bg-red-500 text-4xl font-bold flex justify-center items-center">
-//             <p>This is The Dashbaord</p>
-//         </div>
-//     )
-
- const [employee, setEmployee] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [employee, setEmployee] = useState(null);
   const [salaries, setSalaries] = useState([]);
   const [status, setStatus] = useState("Present");
   const [loading, setLoading] = useState(true);
+
+  // 🔹 Handle Logout
+  const handleLogout = async () => {
+    try {
+      await dispatch(HandleEmployeeLogout()).unwrap();
+      localStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // Still clear localStorage and navigate even if API call fails
+      localStorage.clear();
+      navigate("/");
+    }
+  };
 
   // 🔹 Fetch Employee Profile
   const fetchProfile = async () => {
@@ -76,6 +89,16 @@ export const EmployeeDashboard = () =>{
 
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-8">
+      {/* 🔹 Header with Logout */}
+      <div className="flex justify-between items-center border-b pb-4">
+        <h1 className="text-3xl font-bold">Employee Dashboard</h1>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+        >
+          Logout
+        </button>
+      </div>
       {/* 🔹 Employee Info */}
       <div className="border rounded-lg shadow p-6 bg-white">
         <h2 className="text-2xl font-bold mb-4">Employee Profile</h2>

@@ -1,5 +1,6 @@
 export const APIsEndPoints = {
     LOGIN: "/api/auth/employee/login",
+    LOGOUT: "/api/auth/employee/logout",
     CHECKELOGIN: "/api/auth/employee/check-login",
     FORGOT_PASSWORD: "/api/auth/employee/forgot-password",
     RESET_PASSWORD: (token) => `/api/auth/employee/reset-password/${token}`
@@ -9,11 +10,12 @@ export const HREndPoints = {
     SIGNUP: "/api/auth/HR/signup",
     CHECKLOGIN: "/api/auth/HR/check-login",
     LOGIN: "/api/auth/HR/login",
+    LOGOUT: "/api/auth/HR/logout",
     VERIFY_EMAIL: "/api/auth/HR/verify-email",
     CHECK_VERIFY_EMAIL: "/api/auth/HR/check-verify-email",
     RESEND_VERIFY_EMAIL: "/api/auth/HR/resend-verify-email",
     FORGOT_PASSWORD: "/api/auth/HR/forgot-password",
-    RESET_PASSWORD: (token) => `/api/auth/HR/reset-password/${token}` 
+    RESET_PASSWORD: (token) => `/api/auth/HR/reset-password/${token}`
 }
 
 export const DashboardEndPoints = {

@@ -147,7 +147,7 @@ export const HandleEmployeeCheck = async (req, res) => {
         if (!employee) {
             return res.status(404).json({ success: false, message: "Employee not found" })
         }
-        return res.status(200).json({ success: true, message: "Employee Already Logged In" })
+        return res.status(200).json({ success: true, message: "Employee Already Logged In", data: employee })
     } catch (error) {
         return res.status(500).json({ success: false, error: error, message: "internal error" })
     }

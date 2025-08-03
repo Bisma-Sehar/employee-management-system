@@ -75,6 +75,8 @@ export const HandleUpdateLeaveByEmployee = async (req, res) => {
     try {
         const { leaveID, startdate, enddate, title, reason } = req.body
 
+        console.log(leaveID, startdate, enddate, title, reason)
+
         if (!leaveID || !startdate || !enddate || !title || !reason) {
             return res.status(400).json({ success: false, message: "All fields are required" })
         }

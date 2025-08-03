@@ -77,10 +77,12 @@ export const HRLeavePage = () => {
         }
     }
 
-    const handleStatusUpdate = async (leaveID, newStatus) => {
+    const handleStatusUpdate = async (leave, newStatus) => {
         try {
+            console.log(hrState)
             await dispatch(HandleUpdateLeaveByHR({
-                leaveID: leaveID,
+                ...leave,
+                leaveID: leave._id,
                 status: newStatus,
                 HRID: hrState.data?.data?._id
             })).unwrap()
@@ -256,7 +258,7 @@ export const HRLeavePage = () => {
                                                         variant="outline" 
                                                         size="sm"
                                                         className="text-green-600 border-green-600 hover:bg-green-50"
-                                                        onClick={() => handleStatusUpdate(leave._id, 'Approved')}
+                                                        onClick={() => handleStatusUpdate(leave, 'Approved')}
                                                     >
                                                         Approve
                                                     </Button>
@@ -264,7 +266,7 @@ export const HRLeavePage = () => {
                                                         variant="outline" 
                                                         size="sm"
                                                         className="text-red-600 border-red-600 hover:bg-red-50"
-                                                        onClick={() => handleStatusUpdate(leave._id, 'Rejected')}
+                                                        onClick={() => handleStatusUpdate(leave, 'Rejected')}
                                                     >
                                                         Reject
                                                     </Button>

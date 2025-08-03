@@ -38,4 +38,31 @@ export const HRDepartmentPageEndPoints = {
 
 export const EmployeesIDsEndPoints = {
     GETALL: "/api/v1/employee/all-employees-ids",
-} 
+}
+
+export const SalaryEndPoints = {
+    CREATE: "/api/v1/salary/create-salary",
+    GETALL: "/api/v1/salary/all",
+    GETONE: (salaryID) => `/api/v1/salary/${salaryID}`,
+    UPDATE: "/api/v1/salary/update-salary",
+    DELETE: (salaryID) => `/api/v1/salary/delete-salary/${salaryID}`
+}
+
+export const LeaveEndPoints = {
+    CREATE: "/api/v1/leave/create-leave",
+    HR_CREATE: "/api/v1/leave/HR-create-leave",
+    GETALL: "/api/v1/leave/all",
+    GETONE: (leaveID) => `/api/v1/leave/${leaveID}`,
+    UPDATE_BY_EMPLOYEE: "/api/v1/leave/employee-update-leave",
+    UPDATE_BY_HR: "/api/v1/leave/HR-update-leave",
+    DELETE: (leaveID) => `/api/v1/leave/delete-leave/${leaveID}`
+}
+
+export const AttendanceEndPoints = {
+    INITIALIZE: "/api/v1/attendance/initialize",
+    HR_INITIALIZE: "/api/v1/attendance/HR-initialize",
+    GETALL: "/api/v1/attendance/all",
+    GETONE: (attendanceID) => `/api/v1/attendance/${attendanceID}`,
+    UPDATE: "/api/v1/attendance/update-attendance",
+    DELETE: (attendanceID) => `/api/v1/attendance/delete-attendance/${attendanceID}`
+}

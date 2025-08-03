@@ -10,6 +10,9 @@ import { HRDashboardPage } from "../pages/HumanResources/Dashboard Childs/dashbo
 import { HRProtectedRoutes } from "./HRprotectedroutes.jsx";
 import { HREmployeesPage } from "../pages/HumanResources/Dashboard Childs/employeespage.jsx";
 import { HRDepartmentPage } from "../pages/HumanResources/Dashboard Childs/departmentpage.jsx";
+import { HRSalaryPage } from "../pages/HumanResources/Dashboard Childs/salarypage.jsx";
+import { HRLeavePage } from "../pages/HumanResources/Dashboard Childs/leavepage.jsx";
+import { HRAttendancePage } from "../pages/HumanResources/Dashboard Childs/attendancepage.jsx";
 
 
 
@@ -42,11 +45,18 @@ export const HRRoutes = [
         path: "/HR/dashboard/departments",
         element: <HRDepartmentPage />,
       },
-
-
-  
-
-
+      {
+        path: "/HR/dashboard/salaries",
+        element: <HRSalaryPage />,
+      },
+      {
+        path: "/HR/dashboard/leaves",
+        element: <HRLeavePage />,
+      },
+      {
+        path: "/HR/dashboard/attendance",
+        element: <HRAttendancePage />,
+      },
     ],
   },
   {

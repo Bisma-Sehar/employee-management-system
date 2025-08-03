@@ -1,9 +1,8 @@
 import express from 'express'
 import { HandleCreateSalary, HandleAllSalary, HandleSalary, HandleUpdateSalary, HandleDeleteSalary } from '../controllers/Salary.controller.js'
-import { VerifyhHRToken } from '../middlewares/Auth.middleware.js'
+import { VerifyhHRToken, VerifyEmployeeToken } from '../middlewares/Auth.middleware.js'
 import { RoleAuthorization } from '../middlewares/RoleAuth.middleware.js'
-
-// import { VerifyEmployeeToken } from "../middlewares/Auth.middleware.js";
+import { Salary } from '../models/Salary.model.js'
 
 const router = express.Router()
 
@@ -18,13 +17,32 @@ router.patch("/update-salary", VerifyhHRToken, RoleAuthorization("HR-Admin"), Ha
 router.delete("/delete-salary/:salaryID", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleDeleteSalary)
 
 
-// router.get("/employee/salaries", VerifyEmployeeToken, async (req, res) => {
-//   try {
-//     const salaries = await Salary.find({ employee: req.user.id }).sort({ duedate: -1 });
-//     res.status(200).json({ success: true, data: salaries });
-//   } catch (error) {
-//     res.status(500).json({ success: false, message: error.message });
-//   }
-// });
+// Employee routes for salary access
+router.get("/employee/salaries", VerifyEmployeeToken, async (req, res) => {
+  try {
+    const salaries = await Salary.find({ employee: req.EMid }).sort({ duedate: -1 });
+    res.status(200).json({ success: true, data: salaries });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+router.get("/employee/:salaryID", VerifyEmployeeToken, async (req, res) => {
+  try {
+    const { salaryID } = req.params;
+    const salary = await Salary.findOne({
+      _id: salaryID,
+      employee: req.EMid
+    }).populate("employee", "firstname lastname department");
+    
+    if (!salary) {
+      return res.status(404).json({ success: false, message: "Salary record not found" });
+    }
+    
+    res.status(200).json({ success: true, data: salary });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
 
 export default router

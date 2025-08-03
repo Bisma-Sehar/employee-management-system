@@ -150,7 +150,7 @@ export const HandleHRCheck = async (req, res) => {
         if (!HR) {
             return res.status(404).json({ success: false, message: "HR not found", type: "checkHR" })
         }
-        return res.status(200).json({ success: true, message: "HR Already Logged In", type: "checkHR" })
+        return res.status(200).json({ success: true, message: "HR Already Logged In", type: "checkHR", data: HR })
     } catch (error) {
         return res.status(500).json({ success: false, error: error, message: "internal error", type: "checkHR" })
     }
